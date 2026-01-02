@@ -1,0 +1,72 @@
+<section class="chats-list">
+  <header class="chats-header">
+    <h2>Chats</h2>
+    <button class="nuevo-btn" (click)="nuevo()">
+      <span class="plus-icon">+</span> Nuevo chat
+    </button>
+  </header>
+  
+  <div class="search-container">
+    <input 
+      type="text" 
+      placeholder="Buscar chats..." 
+      (input)="onSearch($event)"
+      class="search-input"
+    />
+    <span class="search-icon">🔍</span>
+  </div>
+  
+  <div class="chats-scrollable">
+    <ul class="chats-ul">
+      @for(chat of filteredChats(); track chat.id){
+        <li 
+          class="chat-item"
+          [class.active]="isActiveChat(chat.id)" 
+          (click)="open(chat.id)"
+        >
+          <div class="chat-avatar">{{chat.name.charAt(0)}}</div>
+          <div class="chat-info">
+            <div class="chat-header">
+              <strong class="chat-name">{{chat.name}}</strong>
+              <span class="chat-time">{{getLastMessageTime(chat)}}</span>
+            </div>
+            <div class="chat-preview">
+              @if(chat.lastMessage){
+                <span class="last-message">{{chat.lastMessage}}</span>
+              } @else {
+                <span class="no-messages">Sin mensajes</span>
+              }
+              @if(chat.unreadCount && chat.unreadCount > 0){
+                <span class="unread-badge">{{chat.unreadCount}}</span>
+              }
+            </div>
+            @if(chat.isOnline !== undefined){
+              <div class="chat-status">
+                @if(chat.isOnline){
+                  <span class="status-dot online"></span>
+                  <span class="status-text">En línea</span>
+                } @else if(chat.lastSeen){
+                  <span class="status-dot offline"></span>
+                  <span class="status-text">Últ. vez {{formatTime(chat.lastSeen)}}</span>
+                } @else {
+                  <span class="status-dot offline"></span>
+                  <span class="status-text">Desconectado</span>
+                }
+              </div>
+            }
+          </div>
+        </li>
+      }
+      @empty {
+        <li class="empty-chats">
+          <div class="empty-icon">💬</div>
+          <p>No hay chats aún</p>
+          <p class="hint">Crea tu primer chat para comenzar</p>
+          <button (click)="nuevo()" class="create-first-chat">
+            Crear primer chat
+          </button>
+        </li>
+      }
+    </ul>
+  </div>
+</section>

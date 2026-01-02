@@ -1,0 +1,77 @@
+@if(chatSignal() && chatSignal()?.name){
+  <header>
+    <button class="back-btn" (click)="goBack()">←</button>
+
+    <div class="chat-header-info">
+      <div class="contact-avatar">{{chatSignal()!.name.charAt(0)}}</div>
+      <div>
+        <h2>{{chatSignal()!.name}}</h2>
+        <div class="contact-status">
+          @if(chatSignal()!.isOnline){
+            <span class="status-indicator online"></span>
+            <span>En línea</span>
+          } @else if(chatSignal()!.lastSeen){
+            <span class="status-indicator offline"></span>
+            <span>Últ. vez {{(chatSignal()!.lastSeen | date:'HH:mm') || ''}}</span>
+          } @else {
+            <span class="status-indicator offline"></span>
+            <span>Desconectado</span>
+          }
+        </div>
+      </div>
+    </div>
+    <span class="message-count">{{chatSignal()!.messages.length}} mensajes</span>
+  </header>
+  
+  <div class="messages-container">
+    @for(message of chatSignal()!.messages; track message.id){
+      <div [class]="message.fromMe ? 'user-message' : 'other-message'">
+        <p>{{message.text}}</p>
+        <div class="message-info">
+          <span>{{formatDate(message.date)}}</span>
+          @if(message.fromMe){
+            <span class="message-status">
+              @if(message.status === 'sent') { ✓ }
+              @else if(message.status === 'delivered') { ✓✓ }
+              @else if(message.status === 'read') { 
+                <span style="color: #4fc3f7">✓✓</span> 
+              }
+              @else { ✓ }
+            </span>
+          }
+        </div>
+      </div>
+    }
+    @empty {
+      <div class="empty-messages">
+        <div class="empty-icon">💬</div>
+        <p>No hay mensajes aún</p>
+        <p class="hint">Envía un mensaje para iniciar la conversación</p>
+      </div>
+    }
+  </div>
+  
+  <form (ngSubmit)="send()" #messageForm="ngForm">
+    <input 
+      [(ngModel)]="newText" 
+      name="text" 
+      placeholder="Escribe un mensaje..." 
+      required
+      minlength="1"
+      maxlength="500"
+    />
+    <button type="submit" [disabled]="!newText.trim()">
+      <span class="send-icon">➤</span>
+    </button>
+  </form>
+}
+@else{
+  <div class="chat-not-found">
+    <div class="not-found-icon">❌</div>
+    <h2>Chat no encontrado</h2>
+    <p>El chat que buscas no existe o ha sido eliminado.</p>
+    <button class="back-button" (click)="goBack()">
+      ← Volver a chats
+    </button>
+  </div>
+}
