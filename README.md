@@ -1,60 +1,101 @@
-# Clase4TP
+# 💬 WhatsApp Web Clone – Angular 17
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.2.
+Clon web de WhatsApp desarrollado con **Angular 17**, utilizando **componentes standalone**, **Signals**, **Angular Router** y una arquitectura simple orientada a aprendizaje y práctica.
 
-## Development server
+El proyecto simula un sistema de chats con historial de mensajes, búsqueda de contactos y creación de nuevos chats, siguiendo una interfaz similar a **WhatsApp Web**.
 
-To start a local development server, run:
+---
 
-```bash
+## 🚀 Tecnologías utilizadas
+
+- **Angular 17**
+- **TypeScript**
+- **Signals (`signal`, `computed`)**
+- **Angular Router**
+- **FormsModule**
+- **HTML5**
+- **CSS3**
+- Arquitectura **Standalone Components**
+- Directivas modernas: `@for`, `@if`
+
+---
+
+## 📁 Estructura del proyecto
+
+```text
+src/
+ ├── app/
+ │   ├── chats-component/
+ │   ├── chat-detail-component/
+ │   ├── new-chat-component/
+ │   ├── services/
+ │   │   └── chat.service.ts
+ │   ├── interfaces/
+ │   │   ├── chat.ts
+ │   │   └── message.ts
+ │   ├── app.html
+ │   ├── app.css
+ │   ├── app.ts
+ │   └── app.routes.ts
+ ├── index.html
+ └── styles.css
+```
+---
+
+## ✨ Funcionalidades
+
+### 📱 Panel lateral (Chats)
+
+- Listado dinámico de chats  
+- Búsqueda en tiempo real  
+- Creación de nuevos chats  
+- Chat activo resaltado  
+- Último mensaje y hora visible  
+
+---
+
+### 💬 Panel de conversación
+
+- Historial de mensajes independiente por chat  
+- Diferenciación visual de mensajes:
+  - **Usuario** → alineados a la derecha  
+  - **App** → alineados a la izquierda  
+- Envío de mensajes con validación  
+- Respuesta automática simulada  
+- Formateo de fecha y hora  
+
+---
+
+## 🧭 Rutas de la aplicación
+
+| Ruta | Descripción |
+|------|------------|
+| `/chats` | Vista principal |
+| `/chats/:id` | Chat seleccionado |
+| `/nuevo` | Crear nuevo chat |
+
+
+---
+
+## 🛠️ Instalación y ejecución
+
+### 1. Clonar el repositorio
+git clone https://github.com/SchallerFran/norte-abanicos-angular
+
+### 2. Instalar dependencias
+npm install
+
+### 3. Ejecutar el servidor de desarrollo
 ng serve
-```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Luego abrir en el navegador:  
+http://localhost:4200
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 👤 Autor
+- **Francisco Schaller**
+- Curso Desarrollo con Angular
+- Trabajo Integrador Final
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
-# frontend-chat
+---
